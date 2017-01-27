@@ -1,0 +1,45 @@
+{% extends "main/base.html" %} {% include '/main/base.html' %} {% block title %}Books{% endblock %} {% block loads %}{% load static %} {% endblock %} {% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'login/css/index.css' %}" /> {% endblock %} {% block content %}
+<div class="">
+    <h1>Add new book</h1>
+    <div class="main">
+        <form action="/books/addBook" method="post">
+            {% csrf_token %}
+            <p>Name: <input type="text" name="Name" value="" id="name"></p>
+            <p>Description:
+                <p> <textarea type="text" name="Description" value="" id="desc" rows="5" cols="50"></textarea></p>
+            </p> <input type="submit" name="Add" value="Add" id="add">
+        </form>
+    </div>
+    <div id="bookTable">
+        <table>
+            <tr>
+                <th>Book Name</th>
+                <th>Description</th>
+                <th>Date Added</th>
+                <th>Actions</th>
+            </tr>
+            {% for book in books %}
+            <tr>
+
+                <td>{{book.bookName}}</td>
+                <td>{{book.bookDesc}}</td>
+                <td>{{book.created_at}}</td>
+                <td>
+                    <form id={{book.id}} action="/books/delete{{book.id}}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" name="Delete">Delete</button>
+                    </form>
+                    <form id={{book.id}} action="/books/edit{{book.id}}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" name="Delete">Edit</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</div>
+
+{% endblock %}

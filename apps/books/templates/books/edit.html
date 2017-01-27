@@ -1,0 +1,23 @@
+{% extends "main/base.html" %} {% include '/main/base.html' %} {% block title %}Edit Book{% endblock %} {% block loads %}{% load static %} {% endblock %} {% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'login/css/index.css' %}" /> {% endblock %} {% block content %}
+<div class="">
+    <h1>edit book</h1>
+    <div class="main">
+        <form action="/books/edit_book" method="post">
+            {% csrf_token %}
+
+            <p>Book Name: <input type="text" name="Name" value="{{book.bookName}}" id="name"></p>
+            <p>Description: {{book.bookDesc}}
+                <p>
+
+                    <textarea type="text" name="Description" value="{{book.bookDesc}}" id="desc" rows="5" cols="50"></textarea></p>
+            </p><input type="hidden" name="id" value="{{bId}}">
+            <input type="submit" name="Add" value="Add" id="add">
+        </form>
+
+    </div>
+
+
+</div>
+
+{% endblock %}
